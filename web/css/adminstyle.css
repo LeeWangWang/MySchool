@@ -253,3 +253,8 @@
 .larry-tab-box>.layui-tab-title .layui-this:after{
 	border-bottom: 0;
 }
+
+#index-logo {
+	user-select: none;
+}
+

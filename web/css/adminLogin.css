@@ -1,99 +1,167 @@
-/*
-* @Author: 李旺旺
-* @Date:   2020-1-1 17:20:54
-* @Email:  2458581048@qq.com
-*/
-
-body {
-    /*background-color: #009688;*/
-    clear: both;
-    margin: 0 auto;
+@charset "utf-8";
+@font-face {
+    font-family: 'adminthemesregular';
+    src: url('font/adminthemes-webfont.eot');
+    src: url('font/adminthemes-webfont.eot?#iefix') format('embedded-opentype'),
+    url('font/adminthemes-webfont.woff2') format('woff2'),
+    url('font/adminthemes-webfont.woff') format('woff'),
+    url('font/adminthemes-webfont.ttf') format('truetype'),
+    url('font/adminthemes-webfont.svg#adminthemesregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+.layui-canvs{
+    position: fixed;
+    top: 0px;
+    left: 0px;
     width: 100%;
-    min-width: 960px;
+    height: 100%;
+    z-index: -1;
 }
-
-.wrapper {
-    width: 884px;
-    margin: auto;
-    /*padding: 170px;*/
-    padding: 12%;
-}
-
-.wrapper .admin_login {
-    font: 25px 'Microsoft YaHei', '微软雅黑';
-    text-align: center;
-    user-select: none;
+/*登陆外边框*/
+.layui-layout-login{
+    width:350px;
+    height:auto;
+    overflow:hidden;
+    margin:10% auto 0 auto;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 40px;
     padding-bottom: 20px;
+    box-shadow:0 -15px 30px #0d957a;
+    border-radius:5px;
+    z-index: 1000;
 }
-
-.loginBox {
-    background-color: #F0F4F6;
-    /*上divcolor*/
-    border: 1px solid #BfD6E1;
-    border-radius: 5px;
-    color: #444;
-    font: 14px 'Microsoft YaHei', '微软雅黑';
-    margin: 0 auto;
-    width: 388px
-}
-
-/*登陆界面上的横线*/
-.loginBox .loginBoxCenter {
-    border-bottom: 1px solid #DDE0E8;
-    padding: 24px;
-}
-
-.loginBox .loginBoxCenter div {
+/*登陆标识*/
+.layui-layout-login h1{
     user-select: none;
-    margin-top: 5px;
-    margin-bottom: 15px
+    font-size:25px;
+    font-weight:bold;
+    text-align:center;
+    color:#45bda6;
+    text-shadow:0 0 1px #0e947a;
+    margin-bottom:15px;
 }
-
-.loginBox .loginBoxButtons {
-    text-align: center;
-    border-top: 0px solid #FFF;
-    border-bottom-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    line-height: 28px;
-    overflow: hidden;
-    padding: 20px 24px;
-    vertical-align: center;
-    filter: alpha(Opacity=80);
-    -moz-opacity: 0.5;
-    opacity: 0.5;
+/*培训结构系统后台*/
+.layui-layout-login h1 strong{
+    display:block;
 }
-
-.loginBox .loginInput {
-    border: 1px solid #D2D9dC;
-    border-radius: 2px;
-    color: #444;
-    font: 12px 'Microsoft YaHei', '微软雅黑';
-    padding: 8px 14px;
-    margin-bottom: 8px;
-    width: 310px;
+/*management System*/
+.layui-layout-login h1 em{
+    display:block;
+    font-size:16px;
+    margin-top:8px;
 }
-
-.loginBox .loginInput:FOCUS {
-    border: 1px solid #B7D4EA;
-    box-shadow: 0 0 8px #B7D4EA;
+.layui-layout-login .larry-login{
+    margin:10px 0;
+    height:42px;
+    overflow:hidden;
+    position:relative;
 }
-
-.loginBox .loginBtn {
-    background-image: -moz-linear-gradient(to bottom, blue, #85CFEE);
-    border: 1px solid #98CCE7;
-    border-radius: 20px;
-    box-shadow: inset rgba(255, 255, 255, 0.6) 0 1px 1px, rgba(0, 0, 0, 0.1) 0 1px 1px;
-    color: #000000;
-    /*登录*/
+.larry-login .login_txtbx{
+    font-size:14px;
+    height:38px;
+    line-height:26px;
+    padding:8px 5%;
+    width:90%;
+    text-indent:2em;
+    border:none;
+    background:#5cbdaa;
+    color:white;
+}
+.larry-login  .login_txtbx::-webkit-input-placeholder {
+    color:#f4f4f4;
+    line-height:inherit;
+}
+.larry-login  .login_txtbx:-moz-placeholder {
+    color:#f4f4f4;
+    line-height:inherit;
+}
+.larry-login  .login_txtbx::-moz-placeholder {
+    color:#f4f4f4;
+    line-height:inherit;
+}
+.larry-login  .login_txtbx:focus{
+    background:#55b7a4;
+}
+.larry-login:before{
+    font-family:'adminthemesregular';
+    position:absolute;
+    top:0;
+    left:10px;
+    height:42px;
+    line-height:42px;
+    font-size:20px;
+    color:#0c9076;
+}
+.layui-user-icon:before{content:"u";}
+.layui-pwd-icon:before{content:"p";}
+.layui-val-icon:before{content:"n";}
+.layui-code-box{
+    width:100%;
+    height: 42px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background:#5cbdaa;
+    font-size:14px;
+    height:26px;
+    line-height:26px;
+}
+.layui-code-box input.login_txtbx{
+    width:45%;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    float: left;
+    color:white;
+    outline:none;
+    border:none;
+}
+.layui-code-box input.login_txtbx:focus{
+    font-size: 20px;
+}
+.layui-code-box  .verifyImg{
+    display: block;
+    width: 43%;
+    height: 100%;
+    position: absolute;
+    top: 0px;
+    right: 0px;
     cursor: pointer;
-    font: bold 13px Arial;
-    padding: 10px 50px;
+}
+.layui-submit .submit_btn{
+    width:100%;
+    height:42px;
+    border:none;
+    font-size:16px;
+    background:#FF5722;
+    color:#f8f8f8;
+    cursor: pointer;
+}
+.submit_btn:hover{
+    background:#009688;
+    color:#f4f4f4;
+}
+.layui-login-text{
+    margin:10px 0;
+    height:60px;
+    overflow:hidden;
+    position:relative;
+}
+.layui-login-text p{
+    color:#53c6b0;
+    font-size:14px;
+    text-align:center;
+    margin:5px 0;
+}
+.layui-login-text a{
+    color:#53c6b0;
+    font-size:14px;
+}
+.layui-login-text a:hover{
+    text-decoration: underline;
 }
 
-#errorMsg {
+.errorMsg {
     color: #cc0000;
     text-align: center;
-    font-family: '微软雅黑';
 }
-
-

@@ -33,7 +33,7 @@ public class signupuserTest {
 
     @Test
     public void test2(){
-        List<SignUpUser> list = signUpUserService.findAll();
+        List<SignUpUser> list = signUpUserService.findAllStudents();
         System.out.println(list);
         for (int i = 0; i < list.size(); i++) {
             SignUpUser sign = list.get(i);

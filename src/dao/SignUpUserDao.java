@@ -1,6 +1,7 @@
 package dao;
 
 import domain.SignUpUser;
+import org.w3c.dom.ls.LSException;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface SignUpUserDao {
     * @Exception:
     * @Description: 查询所有的学生
     */
-    List<SignUpUser> findAll();
+    List<SignUpUser> findAllStudents();
 
     /**
     * @Author:  李旺旺

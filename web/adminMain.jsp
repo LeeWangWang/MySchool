@@ -19,7 +19,7 @@
     </style>
 </head>
 <body>
-    <h1 class="list-student"><a href="${pageContext.request.contextPath}/studentServlet?&funcName=findAllStudents">学生信息列表</a></h1>
+    <h1 class="list-student"><a href="javascript:location.href='tab_students.jsp';">学生信息列表</a></h1>
 </body>
 </html>
 

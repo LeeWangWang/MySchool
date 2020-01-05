@@ -4,6 +4,7 @@ import dao.SignUpUserDao;
 import domain.SignUpUser;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import util.JDBCUtils;
 
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class SignUpUserDaoImpl implements SignUpUserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
-    public List<SignUpUser> findAll() {
+    public List<SignUpUser> findAllStudents() {
         String sql = "select * from signupuser";
         return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class));
     }

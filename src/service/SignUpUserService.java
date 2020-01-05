@@ -15,7 +15,7 @@ public interface SignUpUserService {
     * @Exception:
     * @Description: 查询所有学生
     */
-    List<SignUpUser> findAll();
+    List<SignUpUser> findAllStudents();
 
     /**
     * @Author:  李旺旺

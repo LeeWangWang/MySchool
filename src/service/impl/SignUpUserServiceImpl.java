@@ -18,8 +18,8 @@ public class SignUpUserServiceImpl implements SignUpUserService {
     private SignUpUserDao signUpUserDao = new SignUpUserDaoImpl();
 
     @Override
-    public List<SignUpUser> findAll() {
-        return signUpUserDao.findAll();
+    public List<SignUpUser> findAllStudents() {
+        return signUpUserDao.findAllStudents();
     }
 
     @Override

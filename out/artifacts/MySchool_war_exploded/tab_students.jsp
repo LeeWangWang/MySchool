@@ -12,62 +12,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>学生信息</title>
-    <link type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="common/bootstrap/css/bootstrap.css" media="all">
+    <link rel="stylesheet" type="text/css" href="common/global.css" media="all">
     <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <style>
-        .search_input {
-            width: 200px;
-        }
-        .page_num_inf {
-            color: #878787;
-            font-size: 19px;
-            margin-bottom: 20px;
-        }
-        .page_num_inf i {
-            float: left;
-            width: 4px;
-            background-color: #878787;
-            height: 20px;
-            margin-top: 5px;
-            margin-right: 10px;
-        }
-        .page_num_inf span {
-            color: #ff4848;
-        }
-        /*分页样式*/
-        .pageNum {
-            width: 100%;
-            overflow: hidden;
-        }
-        .pageNum ul li {
-            width: 40px;
-            height: 40px;
-            float: left;
-            border: 1px solid #eee;
-            margin-right: 10px;
-            text-align: center;
-            line-height: 40px;
-        }
-        .pageNum ul li.curPage {
-            /*background-color: rgba(55, 55, 54, 0.88);*/
-            background-color: #009688;
-        }
-        .pageNum ul li a {
-            width: 100%;
-            height: 100%;
-            color: #000000;
-            font-size: 14px;
-        }
-        .pageNum ul .threeword {
-            width: 75px;
-        }
-        a {
-            text-decoration: none;
-        }
-        ul, ol {
-            list-style: none;
-        }
     </style>
     <script>
         function deleteStudent(tele) {
@@ -81,6 +31,37 @@
             alert(this.value());
             window.location=this.value;
         }
+        $.get("course/findAllClass", {} ,function (data) {
+            var list = '<option value="所有课程">所有课程</option>';
+            for (var i = 0; i < data.length; i++) {
+                var li = '<option value="'+data[i]+'">'+data[i]+'</option>';
+                list += li;
+            }
+            $("#select-category").html(list);
+        });
+        $.get("student/findAllStudents", {}, function (data) {
+            var list = '';
+            for (var i = 0; i < data.length; i++) {
+                var student = data[i];
+                var li ='<tr>' +
+                            '<td>'+student.name+'</td>\n' +
+                            '<td>'+student.tele+'</td>\n' +
+                            '<td>'+student.age+'</td>\n' +
+                            '<td>'+student.sex+'</td>\n' +
+                            '<td>'+student.address+'</td>\n' +
+                            '<td>'+student.parentName+'</td>\n' +
+                            '<td>'+student.parentTele+'</td>\n' +
+                            '<td>'+student.coursesName+'</td>\n' +
+                            '<td>\n' +
+                            '    <a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>\n' +
+                            '    <a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="1"><i class="layui-icon"></i> 删除</a>\n' +
+                            '</td>' +
+                        '</tr>';
+                list += li;
+            }
+            $("#class-list").html(list);
+        });
+
     </script>
 </head>
 <body>
@@ -91,12 +72,12 @@
                 <blockquote class="layui-elem-quote news_search">
                     <div class="layui-inline">
                         <select id="select-category" class="form-control" onchange="selectOnchange()">
-                            <option value="tab_students.jsp?cname=所有课程">所有课程</option>
-                            <option value="tab_students.jsp?cname=计算机网络">计算机网络</option>
-                            <option value="tab_students.jsp?cname=数据结构">数据结构</option>
-                            <option value="tab_students.jsp?cname=人工智能">人工智能</option>
-                            <option value="tab_students.jsp?cname=图像处理">图像处理</option>
-                            <option value="tab_students.jsp?cname=操作系统">操作系统</option>
+                            <%--<option value="所有课程">所有课程</option>
+                            <option value="计算机网络">计算机网络</option>
+                            <option value="数据结构">数据结构</option>
+                            <option value="人工智能">人工智能</option>
+                            <option value="图像处理">图像处理</option>
+                            <option value="操作系统">操作系统</option>--%>
                         </select>
                     </div>
 
@@ -112,57 +93,49 @@
                 </blockquote>
 
                 <!-- 学生列表 -->
-                <form id="form" action="${pageContext.request.contextPath}/studentServlet?&funcName=findAllStudents" method="post">
-                    <table border="1" class="table table-bordered table-hover">
-                        <tr class="success">
-                            <th>学生姓名</th>
-                            <th>电话</th>
-                            <th>年龄</th>
-                            <th>性别</th>
-                            <th>地址</th>
-                            <th>父母姓名</th>
-                            <th>父母电话</th>
-                            <th>课程名</th>
-                            <th>操作</th>
-                        </tr>
-                        <c:forEach items="${students}" var="student">
-                            <td>${student.name}</td>
-                            <td>${student.tele}</td>
-                            <td>${student.age}</td>
-                            <td>${student.sex}</td>
-                            <td>${student.address}</td>
-                            <td>${student.parentName}</td>
-                            <td>${student.parentTele}</td>
-                            <td>${student.coursesName}</td>
-                            <td>
-                                <a class="btn btn-default btn-sm" href="${pageContext.request.contextPath}/studentServlet?&funcName=findStudentByTele&tele=${student.tele}">修改</a>
-                                <a class="btn btn-default btn-sm" href="javascript:deleteStudent(${student.tele})">删除</a>
-                            </td>
-                        </c:forEach>
+                <div class="layui-form news_list">
+                    <table class="layui-table">
+                        <colgroup>
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="5%">
+                            <col width="5%">
+                            <col width="20%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                            <col width="10%">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>学生姓名</th>
+                                <th>电话</th>
+                                <th>年龄</th>
+                                <th>性别</th>
+                                <th>地址</th>
+                                <th>父母姓名</th>
+                                <th>父母电话</th>
+                                <th>课程名</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody id="class-list" class="news_content">
+                            <%--<tr>
+                                <td>李先生</td>
+                                <td>155687379525</td>
+                                <td>22</td>
+                                <td>男</td>
+                                <td>山东省 烟台市 莱山区</td>
+                                <td>李先生</td>
+                                <td>155687379525</td>
+                                <td>计算机网络</td>
+                                <td>
+                                    <a class="layui-btn layui-btn-mini news_edit"><i class="iconfont icon-edit"></i> 编辑</a>
+                                    <a class="layui-btn layui-btn-danger layui-btn-mini news_del" data-id="1"><i class="layui-icon"></i> 删除</a>
+                                </td>
+                            </tr>--%>
+                        </tbody>
                     </table>
-                </form>
-                    <div class="page_num_inf">
-                        <i></i> 共
-                        <span id="totalPage">12</span>页<span id="totalCount">132</span>条
-                    </div>
-                    <div class="pageNum">
-                        <ul id="pageNum">
-<%--                            <li><a href="">首页</a></li>
-                            <li class="threeword"><a href="#">上一页</a></li>
-                            <li class="curPage"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="#">8</a></li>
-                            <li><a href="#">9</a></li>
-                            <li><a href="#">10</a></li>
-                            <li class="threeword"><a href="javascript:;">下一页</a></li>
-                            <li class="threeword"><a href="javascript:;">末页</a></li>--%>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </div>
