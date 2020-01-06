@@ -4,7 +4,6 @@ import dao.SignUpUserDao;
 import domain.SignUpUser;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import util.JDBCUtils;
 
 import java.util.ArrayList;
@@ -20,50 +19,43 @@ public class SignUpUserDaoImpl implements SignUpUserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
 
     @Override
-    public List<SignUpUser> findAllStudents() {
-        String sql = "select * from signupuser";
-        return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class));
+    public int findTotalCount(String className, String search) {
+        String sql = "select count(*) from signupuser where 1 = 1 and concat (name,tele,sex,address,parentName,parentTele) like ? ";
+        search = "%"+search+"%";
+        if ("所有课程".equals(className)){
+            System.out.println(sql + " " + className + " " + search);
+            return template.queryForObject(sql, Integer.class, search);
+        }else {
+            sql += " and coursesName = ? ";
+            System.out.println(sql + " " + className + " " + search);
+            return template.queryForObject(sql, Integer.class, search, className);
+        }
     }
 
     @Override
-    public int findTotalCount(String cname, String search) {
-        String sql = "select count(*) from signupuser where 1 = 1 ";
-        StringBuilder sb = new StringBuilder(sql);
-        List params = new ArrayList();
-        if (cname != null && cname.length() != 0){
-            sb.append(" and coursesName = ?");
-        }
-        if(search != null && search.length()!=0){
-            sb.append(" and concat (name,tele,sex,address,parentName,parentTele) like ? ");
-            params.add("%"+search+"%");
-        }
-        sql = sb.toString();
-        System.out.println("findTotalCount:"+sql);
-        System.out.println("findTotalCount:"+params);
-        return template.queryForObject(sql,Integer.class,params.toArray());
-    }
-
-    @Override
-    public List<SignUpUser> findByPage(String cname, int start, int pageSize, String search) {
+    public List<SignUpUser> findByPage(String className, int start, int pageSize, String search) {
         //1.定义sql模板
-        String sql = "select * from tab_route where 1 = 1 ";
-        StringBuilder sb = new StringBuilder(sql);
-        List params = new ArrayList();
-        //2.判断参数是否有值
-        if(cname != null && cname.length() != 0){
-            sb.append( " and coursesName = ? ");
-            params.add(cname);
+        String sql = "select * from signupuser where 1 = 1 ";
+        search = "%"+search+"%";
+        if ("所有课程".equals(className)){
+            sql += " and concat(name,tele,sex,address,parentName,parentTele) like ?  limit ? , ? ";
+            System.out.println(sql + " " +search + " " + start + " " + pageSize);
+            return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), search, start, pageSize);
+        }else {
+            sql += " and coursesName = ?  and concat(name,tele,sex,address,parentName,parentTele) like ?  limit ? , ? ";
+            System.out.println(sql + className + " " + search + " " + start + " " + pageSize);
+            return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), className, search, start, pageSize);
         }
-        if(search != null && search.length() != 0){
-            sb.append(" and concat(name,tele,sex,address,parentName,parentTele) like ? ");
-            params.add("%"+search+"%");
+    }
+
+    @Override
+    public List<SignUpUser> findStudentByClassAndSearch(String className, String search) {
+        String sql = "select * from signupuser where 1 = 1 and concat(name,tele,age,sex,address,parentName,parentTele) like ? ";
+        search = "%"+search+"%";
+        if ("所有课程".equals(className)){
+            return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), search);
         }
-        sb.append(" limit ? , ? ");
-        sql = sb.toString();
-        params.add(start);
-        params.add(pageSize);
-        System.out.println("findByPage:"+sql);
-        System.out.println("findByPage:"+params);
-        return template.query(sql,new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class),params.toArray());
+        sql += " and coursesName = ? ";
+        return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), search, className);
     }
 }

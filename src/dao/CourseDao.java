@@ -15,7 +15,7 @@ public interface CourseDao {
      * @param:   []
      * @Return:  java.util.List<java.lang.String>
      * @Exception:
-     * @Description: 查找所有班级
+     * @Description: 查询所有班级
      */
     List<String> findAllClass();
 

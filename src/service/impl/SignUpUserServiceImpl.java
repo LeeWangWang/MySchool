@@ -18,12 +18,7 @@ public class SignUpUserServiceImpl implements SignUpUserService {
     private SignUpUserDao signUpUserDao = new SignUpUserDaoImpl();
 
     @Override
-    public List<SignUpUser> findAllStudents() {
-        return signUpUserDao.findAllStudents();
-    }
-
-    @Override
-    public PageBean<SignUpUser> pageQuery(String cname, int currentPage, int pageSize, String search) {
+    public PageBean<SignUpUser> pageQuery(String className, int currentPage, int pageSize, String search) {
         //1.封装PageBean对象
         PageBean<SignUpUser> pageBean = new PageBean<SignUpUser>();
         //2.设置当前页码
@@ -31,15 +26,20 @@ public class SignUpUserServiceImpl implements SignUpUserService {
         //3.设置每页显示条数
         pageBean.setPageSize(pageSize);
         //4.设置总记录数
-        int totalCount = signUpUserDao.findTotalCount(cname,search);
+        int totalCount = signUpUserDao.findTotalCount(className,search);
         pageBean.setTotalCount(totalCount);
         //5.设置当前页显示的数据集合
         int start = (currentPage-1)*pageSize;
-        List<SignUpUser> list = signUpUserDao.findByPage(cname, start, pageSize, search);
+        List<SignUpUser> list = signUpUserDao.findByPage(className, start, pageSize, search);
         pageBean.setList(list);
         //6.设置总页数 = 总记录数/每页显示条数
         int totalPage = totalCount%pageSize==0 ? (totalCount/pageSize) : (totalCount/pageSize)+1;
         pageBean.setTotalPage(totalPage);
         return pageBean;
+    }
+
+    @Override
+    public List<SignUpUser> findStudentByClassAndSearch(String className, String search) {
+        return signUpUserDao.findStudentByClassAndSearch(className, search);
     }
 }

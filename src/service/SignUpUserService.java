@@ -9,16 +9,6 @@ public interface SignUpUserService {
 
     /**
     * @Author:  李旺旺
-    * @Date:    2020/1/4 15:54
-    * @param:   []
-    * @Return:  java.util.List<domain.SignUpUser>
-    * @Exception:
-    * @Description: 查询所有学生
-    */
-    List<SignUpUser> findAllStudents();
-
-    /**
-    * @Author:  李旺旺
     * @Date:    2020/1/4 15:55
     * @param:   [cname, currentPage, pageSize, search]
     * @Return:  domain.PageBean<domain.SignUpUser>
@@ -27,4 +17,13 @@ public interface SignUpUserService {
     */
     PageBean<SignUpUser> pageQuery(String cname, int currentPage, int pageSize, String search);
 
+    /**
+    * @Author:  李旺旺
+    * @Date:    2020/1/5 17:06
+    * @param:   [className, search]
+    * @Return:  java.util.List<domain.SignUpUser>
+    * @Exception:
+    * @Description: 根据输入条件查询学生
+    */
+    List<SignUpUser> findStudentByClassAndSearch(String className, String search);
 }

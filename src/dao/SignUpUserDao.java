@@ -9,16 +9,6 @@ public interface SignUpUserDao {
 
     /**
     * @Author:  李旺旺
-    * @Date:    2020/1/4 15:27
-    * @param:   []
-    * @Return:  java.util.List<domain.SignUpUser>
-    * @Exception:
-    * @Description: 查询所有的学生
-    */
-    List<SignUpUser> findAllStudents();
-
-    /**
-    * @Author:  李旺旺
     * @Date:    2020/1/4 15:28
     * @param:   [cid, rname]
     * @Return:  int
@@ -37,4 +27,13 @@ public interface SignUpUserDao {
     */
     List<SignUpUser> findByPage(String cname, int start , int pageSize, String search);
 
+    /**
+    * @Author:  李旺旺
+    * @Date:    2020/1/5 17:08
+    * @param:   [className, search]
+    * @Return:  java.util.List<domain.SignUpUser>
+    * @Exception:
+    * @Description: 根据输入条件查询学生信息
+    */
+    List<SignUpUser> findStudentByClassAndSearch(String className, String search);
 }

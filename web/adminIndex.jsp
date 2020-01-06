@@ -20,8 +20,32 @@
     <link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="common/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/adminstyle.css" media="all">
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="common/layui/layui.js"></script>
+    <script type="text/javascript" src="js/larry.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script>
+        //查询所有的班级
         $(function () {
+            $.get("course/findAllClass", {} ,function (data) {
+                var list= '<dd>\n' +
+                          '    <a href="javascript:;" data-url="tab_students.jsp?class=所有课程">\n' +
+                          '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
+                          '        <span>所有课程</span>\n' +
+                          '    </a>\n' +
+                          '</dd>';
+                for (var i = 0; i < data.length; i++) {
+                    var li = '<dd>\n' +
+                             '    <a href="javascript:;" data-url="tab_students.jsp?class='+data[i]+'">\n' +
+                             '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
+                             '        <span>'+data[i]+'</span>\n' +
+                             '    </a>\n' +
+                             '</dd>';
+                    list += li;
+                }
+                $("#class-item").html(list);
+            });
         });
     </script>
     <%
@@ -81,10 +105,21 @@
                     </li>
                     <!-- 学生信息 -->
                     <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="${pageContext.request.contextPath}/studentServlet?&funcName=findAllStudents">
-                            <i class="iconfont icon-yonghu1"  data-icon='icon-xueshengxinxi'></i>
+                        <a href="javascript:;">
+                            <i class="iconfont icon-jiaoseguanli" ></i>
                             <span>学生信息</span>
+                            <em class="layui-nav-more"></em>
                         </a>
+                        <dl class="layui-nav-child">
+                            <div id="class-item">
+                                <%--<dd>
+                                    <a href="javascript:;" data-url="tab_students.jsp?class=计算机网络">
+                                        <i class="iconfont icon-geren1" data-icon='icon-geren1'></i>
+                                        <span>计算机网络</span>
+                                    </a>
+                                </dd>--%>
+                            </div>
+                        </dl>
                     </li>
 
                     <!-- 个人信息 -->
@@ -344,10 +379,6 @@
             </div>
         </div>
     </div>
-    <!-- 加载js文件-->
-    <script type="text/javascript" src="common/layui/layui.js"></script>
-    <script type="text/javascript" src="js/larry.js"></script>
-    <script type="text/javascript" src="js/adminIndex.js"></script>
 
 </body>
 </html>
