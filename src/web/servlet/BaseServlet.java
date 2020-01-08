@@ -20,13 +20,13 @@ public class BaseServlet extends HttpServlet {
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("BaseServlet的service方法被执行了");
+        //System.out.println("BaseServlet的service方法被执行了");
         //1.获取请求路径
         String requestURI = req.getRequestURI();
-        System.out.println("请求URI： " + requestURI);
+        //System.out.println("请求URI： " + requestURI);
         //2.获取方法名称
         String methodName = requestURI.substring(requestURI.lastIndexOf('/') + 1);
-        System.out.println("方法名称：" + methodName);
+        //System.out.println("方法名称：" + methodName);
         //3.获取方法对象的method，谁调用我？我代表谁
         try {
             //4.获取执行方法
@@ -34,11 +34,11 @@ public class BaseServlet extends HttpServlet {
             //暴力反射
             method.invoke(this, req, resp);
         }catch (NoSuchMethodException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }catch (IllegalAccessException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }catch (InvocationTargetException e){
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 

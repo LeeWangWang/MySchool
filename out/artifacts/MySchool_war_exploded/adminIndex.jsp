@@ -16,38 +16,10 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <!-- load css -->
+    <!-- 加载 css样式 -->
     <link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="common/global.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/adminstyle.css" media="all">
-    <!-- 加载js文件-->
-    <script type="text/javascript" src="common/layui/layui.js"></script>
-    <script type="text/javascript" src="js/larry.js"></script>
-    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script>
-        //查询所有的班级
-        $(function () {
-            $.get("course/findAllClass", {} ,function (data) {
-                var list= '<dd>\n' +
-                          '    <a href="javascript:;" data-url="tab_students.jsp?class=所有课程">\n' +
-                          '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
-                          '        <span>所有课程</span>\n' +
-                          '    </a>\n' +
-                          '</dd>';
-                for (var i = 0; i < data.length; i++) {
-                    var li = '<dd>\n' +
-                             '    <a href="javascript:;" data-url="tab_students.jsp?class='+data[i]+'">\n' +
-                             '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
-                             '        <span>'+data[i]+'</span>\n' +
-                             '    </a>\n' +
-                             '</dd>';
-                    list += li;
-                }
-                $("#class-item").html(list);
-            });
-        });
-    </script>
     <%
         if (null == session.getAttribute("admin")){
             response.sendRedirect(request.getContextPath() + "/adminLogin.jsp");
@@ -237,117 +209,6 @@
                             </dd>
                         </dl>
                     </li>
-
-                    <!-- 会员管理 -->
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="iconfont icon-m-members" ></i>
-                            <span>单页面</span>
-                            <em class="layui-nav-more"></em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" data-url="404.jsp">
-                                    <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-                                    <span>404提示页面</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" data-url="tab.jsp">
-                                    <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-                                    <span>选项卡页面</span>
-                                </a>
-                            </dd>
-                        </dl>
-                    </li>
-
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="iconfont icon-shengchengbaogao" ></i>
-                            <span>网站维护</span>
-                            <em class="layui-nav-more"></em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-zhuti"  data-icon='icon-zhuti'></i>
-                                    <span>网站主题</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="">
-                                    <i class="iconfont icon-database" data-icon='icon-database'></i>
-                                    <span>数据库管理</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="">
-                                    <i class="iconfont icon-shengchengbaogao" data-icon='icon-shengchengbaogao'></i>
-                                    <span>生成页面</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="">
-                                    <i class="iconfont icon-qingchuhuancun" data-icon='icon-qingchuhuancun'></i>
-                                    <span>更新缓存</span>
-                                </a>
-                            </dd>
-
-                        </dl>
-                    </li>
-
-                    <!-- 系统设置 -->
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <i class="iconfont icon-xitong" ></i>
-                            <span>系统设置</span>
-                            <em class="layui-nav-more"></em>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-zhandianpeizhi" data-icon='icon-zhandianpeizhi'></i>
-                                    <span>基本参数设置</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-zhandianguanli1" data-icon='icon-zhandianguanli1'></i>
-                                    <span>多站点管理</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-anquanshezhi" data-icon='icon-anquanshezhi'></i>
-                                    <span>安全设置</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-sms" data-icon='icon-sms'></i>
-                                    <span>短信接口设置</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class="iconfont icon-iconfuzhi01" data-icon='icon-iconfuzhi01'></i>
-                                    <span>系统日志管理</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class='iconfont icon-SQLServershujuku' data-icon='icon-SQLServershujuku'></i>
-                                    <span>SQL命令行工具</span>
-                                </a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;">
-                                    <i class='iconfont icon-xinxicaiji' data-icon='icon-xinxicaiji'></i>
-                                    <span>防采集管理</span>
-                                </a>
-                            </dd>
-                        </dl>
-                    </li>
                 </ul>
             </div>
         </div>
@@ -379,6 +240,35 @@
             </div>
         </div>
     </div>
+
+    <!-- 加载js文件-->
+    <script type="text/javascript" src="common/layui/layui.js"></script>
+    <script type="text/javascript" src="js/larry.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script>
+        //查询所有的班级
+        $(function () {
+            $.get("course/findAllClass", {} ,function (data) {
+                var list= '<dd>\n' +
+                    '    <a href="javascript:;" data-url="tab_students.jsp?className=所有课程">\n' +
+                    '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
+                    '        <span>所有课程</span>\n' +
+                    '    </a>\n' +
+                    '</dd>';
+                for (var i = 0; i < data.length; i++) {
+                    var li = '<dd>\n' +
+                        '    <a href="javascript:;" data-url="tab_students.jsp?className='+data[i]+'">\n' +
+                        '        <i class="iconfont icon-geren1" data-icon=\'icon-geren1\'></i>\n' +
+                        '        <span>'+data[i]+'</span>\n' +
+                        '    </a>\n' +
+                        '</dd>';
+                    list += li;
+                }
+                $("#class-item").html(list);
+            });
+        });
+    </script>
 
 </body>
 </html>

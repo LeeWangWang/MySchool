@@ -12,8 +12,7 @@ import service.SignUpUserService;
 import service.impl.SignUpUserServiceImpl;
 import util.JDBCUtils;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: 李旺旺
@@ -144,5 +143,34 @@ public class dbTest {
         }
     }
 
+    @Test
+    public void test22(){
+        String tele = "17861131902";
+        String className = "计算机网络";
+        //String sql = "select count(*) from signupuser where tele = ? and coursesName = ?";
+        //int num = template.queryForObject(sql, Integer.class, tele, className);
+        SignUpUser student =  signUpUserService.findOneStudent(tele, className);
+        System.out.println(student);
+        //System.out.println(num);
+    }
+
+    @Test
+    public void test66(){
+        SignUpUser signUpUser = new SignUpUser("李先生","17861131997",12,"男","山东省 青岛市","李先生","17861131997","GO Web开发");
+        String userTele = signUpUser.getTele();
+        String className = signUpUser.getCoursesName();
+        String name = signUpUser.getName();
+        String tele = signUpUser.getTele();
+        int age = signUpUser.getAge();
+        String sex = signUpUser.getSex();
+        String address = signUpUser.getAddress();
+        String parentName = signUpUser.getParentName();
+        String parentTele = signUpUser.getParentTele();
+        String coursesName = signUpUser.getCoursesName();
+        String sql = "update signupuser set name = ? , tele = ? , age = ? , sex = ? , address = ? " +
+                " , parentName = ? , parentTele = ? , coursesName = ? where tele = ? and coursesName = ?";
+        int num = template.update(sql, name, tele, age, sex, address, parentName, parentTele, coursesName, userTele,  className);
+        System.out.println("测试结果："+num);
+    }
 
 }

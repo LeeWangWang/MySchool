@@ -174,7 +174,7 @@
 	border-left: solid 2px #1AA094;
 }
 .layui-tab-content{
-	min-height: 640px;
+	min-height: 1000px;
 	/* padding: 5px 0 0 0; */
 }
  /* tab选项卡 */

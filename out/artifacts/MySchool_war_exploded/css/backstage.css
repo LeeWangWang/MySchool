@@ -49,8 +49,8 @@ body {
 
 .header-menu .layui-main {
 	width: calc(100% - 203px);
-	width: -moz-calc(100%-203px);
-	width: -webkit-calc(100%-203px);
+	width: -moz-calc(100% - 203px);
+	width: -webkit-calc(100% - 203px);
 	height: 70px;
 	top: 0px;
 	left: 203px;
@@ -83,7 +83,7 @@ body {
 }
 
 .header-menu .layui-main .side-menu-switch span.switch:hover {
-	background: url('../images/menu_o.png') center center no-repeat;
+	background: url('../images/menu.png') center center no-repeat;
 	background-color: #ffffff;
 	background-size: 100%;
 }
@@ -364,7 +364,7 @@ body {
 }
 
 ul.layui-tab-title {
-	max-width: calc(100%-160px);
+	max-width: calc(100% - 160px);
 	height: 40px;
 	position: absolute;
 	top: 0px;

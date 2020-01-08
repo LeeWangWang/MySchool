@@ -6,7 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import util.JDBCUtils;
 
-import java.util.ArrayList;
+import javax.swing.plaf.IconUIResource;
 import java.util.List;
 
 /**
@@ -57,5 +57,45 @@ public class SignUpUserDaoImpl implements SignUpUserDao {
         }
         sql += " and coursesName = ? ";
         return template.query(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), search, className);
+    }
+
+    @Override
+    public SignUpUser findOneStudent(String tele, String className) {
+        String sql = "select * from signupuser where tele = ? and coursesName = ?";
+        System.out.println(sql + "  "+ tele +"  " + className);
+        return template.queryForObject(sql, new BeanPropertyRowMapper<SignUpUser>(SignUpUser.class), tele, className);
+    }
+
+    @Override
+    public SignUpUser updateStudent(SignUpUser signUpUser, String userTele, String className) {
+        String name = signUpUser.getName();
+        String tele = signUpUser.getTele();
+        int age = signUpUser.getAge();
+        String sex = signUpUser.getSex();
+        String address = signUpUser.getAddress();
+        String parentName = signUpUser.getParentName();
+        String parentTele = signUpUser.getParentTele();
+        String coursesName = signUpUser.getCoursesName();
+        String sql = "update signupuser set name = ? , tele = ? , age = ? , sex = ? , address = ? " +
+                    " , parentName = ? , parentTele = ? , coursesName = ? where tele = ? and coursesName = ?";
+        int num = template.update(sql, name, tele, age, sex, address, parentName, parentTele, coursesName, userTele,  className);
+        if (num == 1){
+            SignUpUser student = findOneStudent(tele, coursesName);
+            return student;
+        }else {
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteStudent(String tele, String coursesName) {
+        String sql = "delete from signupuser where tele = ? and coursesName = ?";
+        System.out.println(sql + " " + tele + " " + coursesName);
+        int num = template.update(sql, tele, coursesName);
+        if (num == 1){
+            System.out.println("删除成功");
+        }else {
+            System.out.println("删除失败");
+        }
     }
 }

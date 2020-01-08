@@ -1,17 +1,4 @@
 @charset "utf-8";
-/*
-* @Author: Larry
-* @Date:   2016-12-15 17:20:54
-* @Last Modified by:   qinsh
-* @Last Modified time: 2016-12-20 18:06:40
-* +----------------------------------------------------------------------
-* | LarryBlogCMS [ LarryCMS网站内容管理系统 ]
-* | Copyright (c) 2016-2017 http://www.larrycms.com All rights reserved.
-* | Licensed ( http://www.larrycms.com/licenses/ )
-* | Author: qinshouwei <313492783@qq.com>
-* +----------------------------------------------------------------------
-*/
-/* 公共样式 */
 body{
 	background: #F1F2F7;
 	overflow-x:hidden;
@@ -22,6 +9,7 @@ body{
 	margin: 0 auto;
 	background: #ffffff;
 	border-radius: 3px;
+	height: 800px;
 	padding-bottom: 0px;
 	border: none;
 }

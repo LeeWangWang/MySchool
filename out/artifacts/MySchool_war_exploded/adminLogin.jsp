@@ -14,7 +14,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="format-detection" content="telephone=no">
-    <!-- load css -->
+    <%--  加载css样式  --%>
     <link rel="stylesheet" type="text/css" href="common/layui/css/layui.css" media="all">
     <link rel="stylesheet" type="text/css" href="css/adminLogin.css" media="all">
 </head>
@@ -40,6 +40,7 @@
         </div>
     </form>
 
+    <%--  加载js文件  --%>
     <script type="text/javascript" src="common/layui/lay/dest/layui.all.js"></script>
     <script type="text/javascript" src="js/adminLogin.js"></script>
     <script type="text/javascript" src="jsplug/jparticle.jquery.js"></script>
@@ -49,6 +50,7 @@
                 background: "#141414",
                 color: "#E6E6E6"
             });
+            $("#input-account").focus();
             //登录链接测试，使用时可删除
             $(".submit_btn").click(function(){
                 if ($("#input-account").val() == ''){

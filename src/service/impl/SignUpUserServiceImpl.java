@@ -42,4 +42,19 @@ public class SignUpUserServiceImpl implements SignUpUserService {
     public List<SignUpUser> findStudentByClassAndSearch(String className, String search) {
         return signUpUserDao.findStudentByClassAndSearch(className, search);
     }
+
+    @Override
+    public SignUpUser findOneStudent(String tele, String className) {
+        return signUpUserDao.findOneStudent(tele, className);
+    }
+
+    @Override
+    public SignUpUser updateStudent(SignUpUser signUpUser, String userTele, String className) {
+        return signUpUserDao.updateStudent(signUpUser, userTele, className);
+    }
+
+    @Override
+    public void deleteStudent(String tele, String coursesName) {
+        signUpUserDao.deleteStudent(tele, coursesName);
+    }
 }

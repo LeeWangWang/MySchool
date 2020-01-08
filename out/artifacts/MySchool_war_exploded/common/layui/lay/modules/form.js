@@ -127,7 +127,7 @@ layui.define("layer", function(e) {
 						var s = i(this),
 							c = s.next("." + e),
 							u = this.disabled,
-							o = i(['<div class="layui-unselect ' + e + (l.checked ? " " + e + "ed" : "") + (u ? " layui-radio-disbaled " + r : "") + '">', '<i class="layui-anim layui-icon">' + a[l.checked ? 0 : 1] + "</i>", "<span>" + (l.title || "未命名") + "</span>", "</div>"].join(""));
+							o = i(['<div id="input-sex'+t+'" class="layui-unselect ' + e + (l.checked ? " " + e + "ed" : "") + (u ? " layui-radio-disbaled " + r : "") + '">', '<i class="layui-anim layui-icon">' + a[l.checked ? 0 : 1] + "</i>", "<span>" + (l.title || "未命名") + "</span>", "</div>"].join(""));
 						c[0] && c.remove(), s.after(o), n.call(this, o)
 					})
 				}
