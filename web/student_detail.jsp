@@ -172,7 +172,7 @@
                     if (student != null){
                         //保存成功
                         alert("修改成功，即将返回上一页面");
-                        location.href="tab_students.jsp?&className="+student.coursesName;
+                        location.href="http://localhost:8080/tab_students.jsp?&className="+student.coursesName;
                     }else {
                         alert("修改失败,请确认信息是否正确");
                         //保存失败

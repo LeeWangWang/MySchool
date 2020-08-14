@@ -1,7 +1,9 @@
 package service;
 
+import domain.CousesVideo;
 import domain.PageBean;
 import domain.SignUpUser;
+import domain.VideoPageBean;
 
 import java.util.List;
 
@@ -56,4 +58,8 @@ public interface SignUpUserService {
     * @Description: 删除学生信息
     */
     void deleteStudent(String tele, String coursesName);
+
+    Boolean isSignUp(String userName);
+
+    Boolean signUp(SignUpUser signUpUser, String name, String coursesName);
 }

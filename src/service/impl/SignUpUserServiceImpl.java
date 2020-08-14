@@ -1,7 +1,8 @@
 package service.impl;
 
-import dao.SignUpUserDao;
 import dao.impl.SignUpUserDaoImpl;
+import dao.SignUpUserDao;
+
 import domain.PageBean;
 import domain.SignUpUser;
 import service.SignUpUserService;
@@ -16,6 +17,7 @@ import java.util.List;
 public class SignUpUserServiceImpl implements SignUpUserService {
 
     private SignUpUserDao signUpUserDao = new SignUpUserDaoImpl();
+    private SignUpUserDao dao = new SignUpUserDaoImpl();
 
     @Override
     public PageBean<SignUpUser> pageQuery(String className, int currentPage, int pageSize, String search) {
@@ -57,4 +59,25 @@ public class SignUpUserServiceImpl implements SignUpUserService {
     public void deleteStudent(String tele, String coursesName) {
         signUpUserDao.deleteStudent(tele, coursesName);
     }
+
+    @Override
+    public Boolean signUp(SignUpUser signUpUser,String name,String coursesName) {
+        SignUpUser result = dao.findSignUpCourses(name,coursesName);
+        if (result == null){
+            return dao.signUp(signUpUser);
+        }else {
+            return false;
+        }
+    }
+
+    @Override
+    public Boolean isSignUp(String userName) {
+        Boolean flag = false;
+        SignUpUser user = dao.isSignUp(userName);
+        if (user != null){
+            flag = true;
+        }
+        return flag;
+    }
+
 }

@@ -4,9 +4,13 @@ import dao.SignUpUserDao;
 import domain.SignUpUser;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import util.DBTool;
 import util.JDBCUtils;
 
-import javax.swing.plaf.IconUIResource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -96,6 +100,88 @@ public class SignUpUserDaoImpl implements SignUpUserDao {
             System.out.println("删除成功");
         }else {
             System.out.println("删除失败");
+        }
+    }
+    @Override
+    public Boolean signUp(SignUpUser signUpUser) {
+        boolean flag = false;
+        if (!(signUpUser.getCoursesName().equals("<--选择课程-->"))){
+            try {
+                Connection conn = DBTool.getConnection();
+                String sql = "insert into signupuser(name,tele,age,sex,address,parentName,parentTele,coursesName) values ('" + signUpUser.getName() + "','"
+                        + signUpUser.getTele() + "','" + signUpUser.getAge() + "','" + signUpUser.getSex() + "','" + signUpUser.getAddress() + "','" + signUpUser.getParentName() + "','" + signUpUser.getParentTele() + "','" + signUpUser.getCoursesName() +"')";
+                PreparedStatement pst = conn.prepareStatement(sql);
+                int result = pst.executeUpdate(sql);
+                if (result == 1) {
+                    flag = true;
+                }
+                pst.close();
+                return flag;
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return flag;
+            }
+        }
+        return flag;
+
+    }
+
+    @Override
+    public SignUpUser findSignUpCourses(String name, String signUpCourses) {
+        try {
+            SignUpUser signUpUser = null;
+            Connection conn = DBTool.getConnection();
+            PreparedStatement pst = conn.prepareStatement("select * from signupuser where name=? and coursesName=?");
+            pst.setString(1,name);
+            pst.setString(2,signUpCourses);
+            ResultSet rs;
+            rs = pst.executeQuery();
+            if(rs.next()) {
+                String name1 = rs.getString(1);
+                String tele = rs.getString(2);
+                int age = rs.getInt(3);
+                String sex = rs.getString(4);
+                String address = rs.getString(5);
+                String parentName = rs.getString(6);
+                String parentTele = rs.getString(7);
+                String coursesName = rs.getString(8);
+                signUpUser = new SignUpUser(name1, tele, age, sex, address, parentName, parentTele, coursesName);
+            }
+            rs.close();
+            pst.close();
+            return signUpUser;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    @Override
+    public SignUpUser isSignUp(String userName) {
+        try {
+            SignUpUser signUpUser = null;
+            Connection conn = DBTool.getConnection();
+            PreparedStatement pst = conn.prepareStatement("select * from signupuser where name=?");
+            pst.setString(1,userName);
+            ResultSet rs;
+            rs = pst.executeQuery();
+            if(rs.next()) {
+                String name = rs.getString(1);
+                String tele = rs.getString(2);
+                int age = rs.getInt(3);
+                String sex = rs.getString(4);
+                String address = rs.getString(5);
+                String parentName = rs.getString(6);
+                String parentTele = rs.getString(7);
+                String coursesName = rs.getString(8);
+                signUpUser = new SignUpUser(name, tele, age, sex, address, parentName, parentTele, coursesName);
+            }
+            rs.close();
+            pst.close();
+            return signUpUser;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 }

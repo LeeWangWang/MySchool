@@ -137,7 +137,7 @@
             if (search == null){
                 search = "";
             }
-            location.href = "http://localhost:8080/MySchool/tab_students.jsp?className="+className+"&search="+search;
+            location.href = "http://localhost:8080/tab_students.jsp?className="+className+"&search="+search;
         }
         $(function () {
             var className = getParameter("className");

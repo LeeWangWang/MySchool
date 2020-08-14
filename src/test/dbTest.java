@@ -4,11 +4,14 @@ import dao.SignUpUserDao;
 import dao.impl.SignUpUserDaoImpl;
 import domain.Admin;
 import domain.PageBean;
+import domain.School;
 import domain.SignUpUser;
 import org.junit.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import service.SchoolService;
 import service.SignUpUserService;
+import service.impl.SchoolServiceImpl;
 import service.impl.SignUpUserServiceImpl;
 import util.JDBCUtils;
 
@@ -145,13 +148,9 @@ public class dbTest {
 
     @Test
     public void test22(){
-        String tele = "17861131902";
-        String className = "计算机网络";
-        //String sql = "select count(*) from signupuser where tele = ? and coursesName = ?";
-        //int num = template.queryForObject(sql, Integer.class, tele, className);
-        SignUpUser student =  signUpUserService.findOneStudent(tele, className);
-        System.out.println(student);
-        //System.out.println(num);
+        SchoolService schoolService = new SchoolServiceImpl();
+        School school = schoolService.findSchool();
+        System.out.println("学校信息：" + school.toString());
     }
 
     @Test

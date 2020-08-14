@@ -1,7 +1,6 @@
 package dao;
 
 import domain.SignUpUser;
-import org.w3c.dom.ls.LSException;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public interface SignUpUserDao {
     * @Exception:
     * @Description: 查询当前页面的数据
     */
-    List<SignUpUser> findByPage(String cname, int start , int pageSize, String search);
+    List<SignUpUser> findByPage(String cname, int start, int pageSize, String search);
 
     /**
     * @Author:  李旺旺
@@ -66,4 +65,8 @@ public interface SignUpUserDao {
     * @Description: 删除学生信息
     */
     void deleteStudent(String tele, String coursesName);
+
+    public Boolean signUp(SignUpUser signUpUser);
+    public SignUpUser findSignUpCourses(String name, String signUpCourses);
+    public SignUpUser isSignUp(String userName);
 }
